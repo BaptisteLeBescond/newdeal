@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Pmss</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pmss.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ pmss.type }}</td>
+            </tr>
+            <tr>
+                <th>Month</th>
+                <td>{{ pmss.month }}</td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ pmss.year }}</td>
+            </tr>
+            <tr>
+                <th>Value</th>
+                <td>{{ pmss.value }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cotisations_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('cotisations_edit', { 'id': pmss.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

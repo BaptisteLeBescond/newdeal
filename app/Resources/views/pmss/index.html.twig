@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Pmsses list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Month</th>
+                <th>Year</th>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pmss in pmsses %}
+            <tr>
+                <td><a href="{{ path('cotisations_show', { 'id': pmss.id }) }}">{{ pmss.id }}</a></td>
+                <td>{{ pmss.type }}</td>
+                <td>{{ pmss.month }}</td>
+                <td>{{ pmss.year }}</td>
+                <td>{{ pmss.value }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('cotisations_show', { 'id': pmss.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('cotisations_edit', { 'id': pmss.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cotisations_new') }}">Create a new pmss</a>
+        </li>
+    </ul>
+{% endblock %}
