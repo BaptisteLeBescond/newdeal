@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\AppBundle;
 use AppBundle\Entity\Pmss;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -132,5 +133,30 @@ class PmssController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Get a pmss by year and month.
+     *
+     * @Route("/{year}/{month}", name="cotisations_by_year_month")
+     * @Method("GET")
+     */
+    public function showYearMonthAction($year, $month)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $pmss = $em->getRepository('AppBundle:Pmss')->findBy(
+            array(
+                'year' => $year,
+                'month' => $month,
+            )
+        );
+
+        $deleteForm = $this->createDeleteForm($pmss);
+
+        return $this->render('pmss/show.html.twig', array(
+            'pmss' => $pmss,
+            'delete_form' => $deleteForm->createView(),
+        ));
     }
 }
